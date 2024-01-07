@@ -8,11 +8,25 @@ shift = int(input("Type the shift number:\n"))
 
 def encrypt(text, shift):
   newletter = ""
-  for i in range(len(text)):
-    newletter += alphabet[(alphabet.index(text[i]) + shift) % 26]
+  for letter in text:
+    newletter += alphabet[(alphabet.index(letter) + shift) % 26]
   print(newletter)
 
-encrypt(text, shift)
+def decrypt(text, shift):
+  newletter = ""
+  for letter in text:
+    index = (alphabet.index(letter) - shift) % 26
+    if(index >= 0):
+      newletter +=  alphabet[index]
+    else:
+      newletter += alphabet[26+index]
+
+  print(newletter)
+
+if direction.lower() == "encode":
+  encrypt(text, shift)
+else:
+  decrypt(text, shift)
     
 #TODO-1: Create a function called 'encrypt' that takes the 'text' and 'shift' as inputs.
 
