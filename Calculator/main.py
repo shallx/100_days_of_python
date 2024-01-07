@@ -1,6 +1,11 @@
+import os
 from art import logo
 
-print(logo)
+def cls():
+    os.system('cls' if os.name=='nt' else 'clear')
+
+
+
 
 def add(n1, n2):
     return n1 + n2
@@ -21,18 +26,26 @@ operations = {
     "*": multiply
 }
 
-num = int(input("What's the first number?: "))
-for symbol in operations:
-    print(symbol)
+def calculator():
+    cls()
+    print(logo)
+    num = float(input("What's the first number?: "))
+    for symbol in operations:
+        print(symbol)
 
 
-continued = True
+    continued = True
 
-while continued:
-    operation_symbol = input("Pick an operation from the line above: ")
-    num2 = int(input("What's the next number?: "))
-    result = operations[operation_symbol](num,num2)
+    while continued:
+        operation_symbol = input("Pick an operation from the line above: ")
+        num2 = float(input("What's the next number?: "))
+        result = operations[operation_symbol](num,num2)
 
-    print(f"{num} {operation_symbol} {num2} = {result}")
-    num = result
-    continued = input(f"Type 'y' to continue with {result}, or 'n' to exit: ") == "y"
+        print(f"{num} {operation_symbol} {num2} = {result}")
+        num = result
+        if input(f"Type 'y' to continue with {result}, or 'n' to start fresh: ").lower() == "y":
+            continued = True
+        else:
+            calculator()
+
+calculator()
