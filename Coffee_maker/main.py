@@ -1,3 +1,9 @@
+from art import logo
+import os
+
+def cls():
+    os.system('cls' if os.name=='nt' else 'clear')
+
 MENU = {
     "espresso": {
         "ingredients": {
@@ -24,61 +30,53 @@ MENU = {
     }
 }
 
-water = 200
-milk = 200
-coffee = 100
-money = 0
 resource = {
-    "water" : 200,
-    "milk" : 200,
-    "coffee" : 100,
+    "water" : 500,
+    "milk" : 500,
+    "coffee" : 300,
     "money" : 0,
 }
+    
+def checkAvailability(userOption):
+    ingredients = MENU[userOption]["ingredients"]
+    for key in ingredients:
+        if resource[key] < ingredients[key]:
+            print(f"Not enough {key}! ")
+            return False
+    return True
 
-# Make this function work in all regards
 def makeCoffee(userOption):
     ingredients = MENU[userOption]["ingredients"]
-    if resource["water"] >= ingredients["water"] and resource["coffee"] >= ingredients["coffee"]:
-        if "milk" in ingredients and resource["milk"] < ingredients["milk"]:
-            print("Sorry! There is not enough milk")
-        else: 
-            print(f"Here is your {userOption} ☕️. Enjoy!")
-    
-    
-
-def calcPayment(userOption, quarters, dimes, nickles, pennies):
-    return quarters * .25 + dimes * .1 + nickles * .05 + pennies * .01
-    # return True if money >= MENU[userOption]["cost"] else False
+    for key in ingredients:
+        resource[key] -= ingredients[key]
+    resource["money"] += MENU[userOption]["cost"]
 
 
-# TODO: input user
 def coffeeMaker():
-    
-    quarters = 0
-    dimes = 0
-    nickles = 0
-    pennies = 0
+    print(logo)
+    while True:
+        userMoney = 0
+        userOption = input("What would you like? (espresso/latte/cappuccino):").lower()
 
-    userOption = input("What would you like? (espresso/latte/cappuccino):")
+        while not (userOption == "espresso" or userOption == "latte" or userOption == "cappuccino" or "report"):
+            print("Invalid choice, try again!")
+            userOption = input("What would you like? (espresso/latte/cappuccino):")
 
-    while not (userOption == "espresso" or userOption == "latte" or userOption == "cappuccino"):
-        print("Invalid choice, try again!")
-        userOption = input("What would you like? (espresso/latte/cappuccino):")
-    
-    # Printing report
-    if userOption == "report":
-        print(f"Water: {water}ml\nMilk: {milk}ml\nCoffee: {coffee}g\nMoney: ${money}")
-    
-    userMoney = calcPayment(userOption, quarters, dimes, nickles, pennies)
+        if userOption == "report":
+            print(f"Water: {resource['water']}ml\nMilk: {resource['milk']}ml\nCoffee: {resource['coffee']}g\nMoney: ${resource['money']}")
+        else:
 
-    if MENU[userOption]["cost"] > userMoney:
-        print("Sorry that's not enough money. Money refunded.")
-    else:
-        makeCoffee(userOption, water, milk, coffee, money)
+            userMoney += int(input("how many quarters?: ")) * .25
+            userMoney += int(input("how many dimes?: ")) * .1
+            userMoney += int(input("how many nickles?: ")) * .05
+            userMoney += int(input("how many pennies?: ")) * .01
 
-
-    
-    
+            orderCost = MENU[userOption]['cost']
+            if orderCost > userMoney:
+                print("Sorry that's not enough money. Money refunded.")
+            elif checkAvailability(userOption):
+                makeCoffee(userOption)
+                print(f"Bill: {orderCost} | Changes: {round(userMoney - orderCost, 2)}")
+                print(f"Here is your {userOption} ☕️. Enjoy!")
 
 coffeeMaker()
-# TODO: store and help print report
