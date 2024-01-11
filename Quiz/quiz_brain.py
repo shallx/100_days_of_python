@@ -1,3 +1,4 @@
+import html
 class QuizBrain:
     def __init__(self, question_list):
         self.question_number = 0
@@ -14,7 +15,7 @@ class QuizBrain:
         ans = user_answer
         while not (ans == "true" or ans == "t" or ans == "false" or ans == "f"):
             print("Invalid input, try again!")
-            ans = input(f"Q.{self.question_number} {question.text} (True/False)?: ").lower()
+            ans = input(f"Q.{self.question_number} {html.unescape(question.text)} (True/False)?: ").lower()
         
         ans = "True" if ans == "true" or ans == "t" else "False"
         
@@ -31,5 +32,5 @@ class QuizBrain:
     def next_question(self):
         question = self.question_list[self.question_number]
         self.question_number += 1
-        ans = input(f"Q.{self.question_number} {question.text} (True/False)?: ").lower()
+        ans = input(f"Q.{self.question_number} {html.unescape(question.text)} (True/False)?: ").lower()
         self.check_answer(ans, question)
