@@ -1,13 +1,13 @@
-from turtle import Turtle, Screen
+from turtle import Turtle, Screen, colormode
 from random_walk import random_walk
 
+colormode(255)
 t = Turtle()
 t.color("red")
 screen = Screen()
 screen.bgcolor("black")
 
-colors = ["blue", "red", "salmon", "green", "purple", "yellow"]
 
-random_walk(t, colors)
+random_walk(t)
 
 t.screen.mainloop()
