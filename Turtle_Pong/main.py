@@ -1,6 +1,7 @@
 # from canvas import Canvas
 import time
 from turtle import Screen, mode
+from scoreboard import Scoreboard
 from constant import CANVAS_HEIGHT, CANVAS_WIDTH, CANVAS_COLOR, TITLE
 from paddle import Paddle
 from ball import Ball
@@ -18,6 +19,8 @@ screen.tracer(0)
 l_paddle = Paddle((-350, 0))
 r_paddle = Paddle((350, 0))
 ball = Ball()
+scoreboard = Scoreboard()
+sleep = .1
 
 # Listeners
 screen.listen()
@@ -30,7 +33,7 @@ screen.onkey(r_paddle.go_down, "Down")
 game_is_on = True
 
 while game_is_on:
-    time.sleep(0.1)
+    time.sleep(ball.move_speed)
     ball.handleWallCollusion()
     ball.move()
     screen.update()
@@ -38,6 +41,10 @@ while game_is_on:
     ball.handleCollusionWithPaddle(l_paddle)
     ball.handleCollusionWithPaddle(r_paddle)
     
-    ball.handleOutOfRange()
+    if ball.handleHittingRightWall():
+        scoreboard.add_l_point()
+
+    if ball.handleHittingLeftWall():
+        scoreboard.add_r_point()
 
 screen.exitonclick()
