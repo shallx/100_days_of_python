@@ -1,10 +1,9 @@
 from turtle import Screen, Turtle
+from constants import SNAKE_COLOR
 UP = 0
 DOWN = 180
 RIGHT = 90
 LEFT = 270
-'''0, 10, 6, 3, 1'''
-COLOR = "white"
 SPEED = 6
 
 class Snake:
@@ -16,9 +15,9 @@ class Snake:
     def create_snake(self):
         '''Create Snake using turtle'''
         for i in range(3):
-            t = Turtle("turtle")
+            t = Turtle("square")
             t.speed(SPEED)
-            t.color(COLOR)
+            t.color(SNAKE_COLOR)
             t.penup()
             t.goto(0 - i*20,0)
             self.segments.append(t)
