@@ -18,6 +18,8 @@ screen.tracer(0)
 l_paddle = Paddle((-350, 0))
 r_paddle = Paddle((350, 0))
 ball = Ball()
+
+# Listeners
 screen.listen()
 screen.onkey(l_paddle.go_up, "w")
 screen.onkey(l_paddle.go_down, "s")
@@ -29,8 +31,13 @@ game_is_on = True
 
 while game_is_on:
     time.sleep(0.1)
-    ball.didCollide()
+    ball.handleWallCollusion()
     ball.move()
     screen.update()
+    
+    ball.handleCollusionWithPaddle(l_paddle)
+    ball.handleCollusionWithPaddle(r_paddle)
+    
+    ball.handleOutOfRange()
 
 screen.exitonclick()
