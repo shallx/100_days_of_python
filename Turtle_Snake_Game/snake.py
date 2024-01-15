@@ -1,14 +1,24 @@
 from turtle import Screen, Turtle
+UP = 0
+DOWN = 180
+RIGHT = 90
+LEFT = 270
+'''0, 10, 6, 3, 1'''
+COLOR = "white"
+SPEED = 6
+
 class Snake:
     segments: list[Turtle]  = []
     def __init__(self):
         self.create_snake()
+        self.head = self.segments[0]
 
     def create_snake(self):
         '''Create Snake using turtle'''
         for i in range(3):
-            t = Turtle("square")
-            t.color("white")
+            t = Turtle("turtle")
+            t.speed(SPEED)
+            t.color(COLOR)
             t.penup()
             t.goto(0 - i*20,0)
             self.segments.append(t)
@@ -19,4 +29,22 @@ class Snake:
             x = self.segments[i-1].xcor()
             y = self.segments[i-1].ycor()
             self.segments[i].goto(x, y)
-        self.segments[0].forward(20)
+        self.head.forward(20)
+
+    def up(self):
+        if self.head.heading() != DOWN:
+            self.head.setheading(UP)
+
+    def down(self):
+        if self.head.heading() != UP:
+            self.head.setheading(DOWN)
+
+    def left(self):
+        if self.head.heading() != RIGHT:
+            self.head.setheading(LEFT)
+    
+    def right(self):
+        if self.head.heading() != LEFT:
+            self.head.setheading(RIGHT)
+
+    

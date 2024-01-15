@@ -1,5 +1,5 @@
 import time
-from turtle import Screen, Turtle
+from turtle import Screen, Turtle, mode
 from typing import List
 from snake import Snake
 
@@ -8,8 +8,15 @@ screen.setup(width=600, height=600)
 screen.tracer(0)
 screen.bgcolor("black")
 screen.title("My Snake Game")
+mode("logo")
 
 snake = Snake()
+
+screen.listen()
+screen.onkey(snake.up, "w")
+screen.onkey(snake.down, "s")
+screen.onkey(snake.left, "a")
+screen.onkey(snake.right, "d")
 
     
 game_is_on = True
