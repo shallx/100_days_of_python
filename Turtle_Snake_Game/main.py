@@ -3,6 +3,7 @@ from turtle import Screen, Turtle, mode
 from typing import List
 from snake import Snake
 from food import Food
+from scoreboard import Scoreboard
 from constants import SCREEN_SIZE, BACKGROUND_COLOR
 
 screen = Screen()
@@ -14,6 +15,7 @@ mode("logo")
 
 snake = Snake()
 food = Food()
+score = Scoreboard()
 
 screen.listen()
 screen.onkey(snake.up, "w")
@@ -32,5 +34,6 @@ while game_is_on:
     if snake.head.distance(food) < 18:
         print("nom nom nom")
         food.refresh()
+        score.increase_score()
     
 screen.exitonclick()
