@@ -14,7 +14,12 @@ class CarManager(Turtle):
         self.shapesize(stretch_wid=1, stretch_len=3)
         # self.setheading(90)
         self.goto(300 - 30, random.randint(-250, 250))
+        self.move_speed = STARTING_MOVE_DISTANCE
         
             
     def move(self):
-        self.back(10)
+        self.back(self.move_speed)
+    
+    def increase_speed(self):
+        print("Increasing speed")
+        self.move_speed += MOVE_INCREMENT

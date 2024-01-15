@@ -9,6 +9,7 @@ screen.setup(width=600, height=600)
 screen.tracer(0)
 
 player = Player()
+scoreboard = Scoreboard()
 
 screen.listen()
 screen.onkey(player.move, "w")
@@ -20,6 +21,11 @@ cars: list[CarManager] = []
 while game_is_on:
     time.sleep(0.1)
     screen.update()
+
+    if player.did_reach_top():
+        scoreboard.level_up()
+        player.level_up()
+        car.increase_speed()
     
     if frame % 6 == 0:
         car = CarManager()
@@ -27,4 +33,12 @@ while game_is_on:
     frame += 1
     
     for car in cars:
+        if car.distance(player) < 10:
+            game_is_on = False
+            scoreboard.game_over()
+            break
         car.move()
+
+    
+
+screen.exitonclick()
