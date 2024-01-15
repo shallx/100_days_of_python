@@ -13,7 +13,7 @@ class Food(Turtle):
         self.refresh()
     
     def refresh(self):
-        pos = int(SCREEN_SIZE/2) - 20
+        pos = int(SCREEN_SIZE/2) - 30
         random_x = random.randint(-pos, pos)
         random_y = random.randint(-pos, pos)
 

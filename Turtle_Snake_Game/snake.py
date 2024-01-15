@@ -15,12 +15,18 @@ class Snake:
     def create_snake(self):
         '''Create Snake using turtle'''
         for i in range(3):
-            t = Turtle("square")
-            t.speed(SPEED)
-            t.color(SNAKE_COLOR)
-            t.penup()
-            t.goto(0 - i*20,0)
-            self.segments.append(t)
+            self.add_segment((0 - i*20,0))
+
+    def add_segment(self, position):
+        t = Turtle("square")
+        t.speed(SPEED)
+        t.color(SNAKE_COLOR)
+        t.penup()
+        t.goto(position)
+        self.segments.append(t)
+
+    def extend(self):
+        self.add_segment(self.segments[-1].pos())
 
     def move(self):
         '''Move the snake forward each seg linked to other'''
@@ -46,7 +52,7 @@ class Snake:
         if self.head.heading() != LEFT:
             self.head.setheading(RIGHT)
 
-    def hitWall(self):
+    def check_if_snake_hit_wall(self):
         boundary = SCREEN_SIZE//2 - SNAKE_SIZE
         if self.head.xcor() > boundary or self.head.xcor() < -boundary or self.head.ycor() > boundary or self.head.ycor() < -boundary:
             return True
@@ -57,6 +63,12 @@ class Snake:
         if self.head.distance(food) < 18:
             return True
         else:
-            False
+            return False
 
+    def check_if_snake_hit_body(self):
+        for seg in self.segments[1:]:
+            if self.head.distance(seg) < 10:
+                return True
+        return False
+    
     

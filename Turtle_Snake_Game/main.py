@@ -33,9 +33,10 @@ while game_is_on:
 
     if snake.eat(food):
         food.refresh()
+        snake.extend()
         scoreBoard.increase_score()
 
-    if snake.hitWall():
+    if snake.check_if_snake_hit_wall() or snake.check_if_snake_hit_body():
         game_is_on = False
         scoreBoard.game_over()
     
