@@ -1,0 +1,5 @@
+CANVAS_HEIGHT = 600
+CANVAS_WIDTH = 800
+CANVAS_COLOR = "black"
+TITLE = "My pong Game"
+OBJECT_COLOR = "white"
