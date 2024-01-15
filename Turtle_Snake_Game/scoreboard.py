@@ -16,5 +16,9 @@ class Scoreboard(Turtle):
 
     def rewrite_score(self):
         self.clear()
-        self.goto(0, SCREEN_SIZE//2 - 20)
-        self.write(f"Score: {self.score}", False, align=SCOREBOARD_ALIGMENT, font=SCOREBOARD_FONT)
+        self.goto(0, SCREEN_SIZE//2 - 30)
+        self.write(f"Score: {self.score}", align=SCOREBOARD_ALIGMENT, font=SCOREBOARD_FONT)
+    
+    def game_over(self):
+        self.goto(0,0)
+        self.write(f"GAME OVER", align=SCOREBOARD_ALIGMENT, font=SCOREBOARD_FONT)

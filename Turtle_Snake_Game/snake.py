@@ -1,5 +1,5 @@
 from turtle import Screen, Turtle
-from constants import SNAKE_COLOR
+from constants import SNAKE_COLOR, SCREEN_SIZE, SNAKE_SIZE
 UP = 0
 DOWN = 180
 RIGHT = 90
@@ -45,5 +45,18 @@ class Snake:
     def right(self):
         if self.head.heading() != LEFT:
             self.head.setheading(RIGHT)
+
+    def hitWall(self):
+        boundary = SCREEN_SIZE//2 - SNAKE_SIZE
+        if self.head.xcor() > boundary or self.head.xcor() < -boundary or self.head.ycor() > boundary or self.head.ycor() < -boundary:
+            return True
+        else:
+            return False
+        
+    def eat(self, food: Turtle):
+        if self.head.distance(food) < 18:
+            return True
+        else:
+            False
 
     

@@ -15,7 +15,7 @@ mode("logo")
 
 snake = Snake()
 food = Food()
-score = Scoreboard()
+scoreBoard = Scoreboard()
 
 screen.listen()
 screen.onkey(snake.up, "w")
@@ -31,9 +31,12 @@ while game_is_on:
     time.sleep(.1)
     snake.move()
 
-    if snake.head.distance(food) < 18:
-        print("nom nom nom")
+    if snake.eat(food):
         food.refresh()
-        score.increase_score()
+        scoreBoard.increase_score()
+
+    if snake.hitWall():
+        game_is_on = False
+        scoreBoard.game_over()
     
 screen.exitonclick()

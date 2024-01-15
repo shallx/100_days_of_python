@@ -3,4 +3,5 @@ SNAKE_COLOR = "white"
 SNAKE_SPEED = 6
 SCREEN_SIZE = 600
 SCOREBOARD_ALIGMENT = "center"
-SCOREBOARD_FONT = ("Ariel", 14, "normal")
+SCOREBOARD_FONT = ("Ariel", 24, "normal")
+SNAKE_SIZE = 20
