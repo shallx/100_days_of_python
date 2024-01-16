@@ -37,7 +37,7 @@ while game_is_on:
         scoreBoard.increase_score()
 
     if snake.check_if_snake_hit_wall() or snake.check_if_snake_hit_body():
-        game_is_on = False
-        scoreBoard.game_over()
+        scoreBoard.reset()
+        snake.reset()
     
 screen.exitonclick()
