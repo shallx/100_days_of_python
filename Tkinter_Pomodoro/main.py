@@ -1,16 +1,19 @@
 import tkinter as tk
+from tkinter import messagebox
 # ---------------------------- CONSTANTS ------------------------------- #
 PINK = "#e2979c"
 RED = "#e7305b"
 GREEN = "#9bdeac"
 YELLOW = "#f7f5dd"
 FONT_NAME = "Courier"
-WORK_MIN = .1
-SHORT_BREAK_MIN = .2
-LONG_BREAK_MIN = 1.3
-# WORK_MIN = 25
-# SHORT_BREAK_MIN = 5
-# LONG_BREAK_MIN = 20
+
+# WORK_MIN = .1
+# SHORT_BREAK_MIN = .2
+# LONG_BREAK_MIN = 1.3
+
+WORK_MIN = 25
+SHORT_BREAK_MIN = 5
+LONG_BREAK_MIN = 20
 reps = 0
 timer = None
 
@@ -45,6 +48,12 @@ def start_timer():
         count_down(work_sec)
 
 # ---------------------------- COUNTDOWN MECHANISM ------------------------------- # 
+def popup_showmessage(title, message):
+    # Show app on top
+    window.attributes('-topmost', 1)
+    messagebox.showinfo(title, message)
+    window.attributes('-topmost', 0) 
+    
 def count_down(count):
     global timer
     count = int(count)
@@ -68,6 +77,13 @@ def count_down(count):
         for _ in range(work_sessions):
             marks += "✓"
         check_label.config(text=marks)
+        
+        if reps % 2 == 1:
+            popup_showmessage("Breaktime Over", "Get back to work")
+        else:
+            popup_showmessage("Worktime Over", "Time to take break")
+        
+        
 
 # ---------------------------- UI SETUP ------------------------------- #
 window = tk.Tk()
