@@ -14,41 +14,31 @@ print_board = PrintBoard()
 # Read from CSV
 data = pandas.read_csv("50_states.csv")
 
-data2 = data.to_dict()
-states = data.state.to_list()
-x = data.x.to_list()
-y = data.y.to_list()
-my_data = {}
-for i in range(50):
-    my_data[states[i].lower()] = (x[i], y[i])
-
+states = [state.lower() for state in data.state.to_list()]
 matched_states = []
 
 
-while len(my_data.keys()):
+while len(matched_states) < 50:
 
     # User Input
     answer_state = screen.textinput(title=f"{len(matched_states)}/50 Guess the state", prompt="What's another state name?").lower()
-    # matched_data = data[data.state == answer_state]
 
-    # print(matched_data)
-    # print(matched_data.index[0])
-    # print(matched_data.x[1])
-    if answer_state in my_data.keys():
-        pos = my_data.pop(answer_state)
+    if answer_state == "exit":
+        break
+    if answer_state in states:
+        matched_data = data[data.state.str.lower() == answer_state]
+        print(matched_data)
+        print(matched_data.x.item())
+        print(matched_data.y.item())
+        print_board.write_state((int(matched_data.x.item()), int(matched_data.y.item())), matched_data.state.item())
         matched_states.append(answer_state)
-        print(pos)
-        print_board.write_state(pos, answer_state)
+        states.pop(states.index(answer_state))
 
-        
-        # x = int(matched_data.x[1])
-        # y = int(matched_data.y[1])
-        # state = matched_data.state[1]
-        # print(x)
-        # print(y)
-        # print(state)
-        # print_board.write_state((x, y), state)
-        # data.state.pop(matched_data.index[0])
 
+missed_states = {
+    "states": states
+}
+
+pandas.DataFrame(missed_states).to_csv("missed_states.csv")
 
 turtle.mainloop()
