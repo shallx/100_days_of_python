@@ -1,7 +1,15 @@
 import tkinter as tk
 from tkinter import messagebox
+import pyperclip
+from password import PasswordGenerator
 
 # ---------------------------- PASSWORD GENERATOR ------------------------------- #
+
+def on_generate():
+    password_entry.delete(0, tk.END)
+    password = PasswordGenerator().generate()
+    password_entry.insert(0, password)
+    pyperclip.copy(password)
 
 # ---------------------------- SAVE PASSWORD ------------------------------- #
 def on_save():
@@ -49,7 +57,7 @@ password_entry = tk.Entry(width=21,fg="black", bg="white")
 password_entry.grid(row=3, column=1)
 
 # Button
-generate_button = tk.Button(text="Generate Password").grid(row=3, column=2)
+generate_button = tk.Button(text="Generate Password", command=on_generate).grid(row=3, column=2)
 add_button = tk.Button(text="Add", width=36, command=on_save).grid(row=4, column=1, columnspan=2)
 
 window.mainloop()
