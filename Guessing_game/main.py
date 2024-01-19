@@ -12,6 +12,13 @@ EASY_ATTEMPTS = 10
 HARD_ATTEMPTS = 5
 
 
+def get_difficulty():
+    difficulty = input("Choose a difficulty. Type 'easy' or 'hard:'").lower()
+    if not (difficulty == "easy" or difficulty == "hard"):
+        print("Invalid selection! Try again")
+        get_difficulty()
+    else:
+        return difficulty
 
 
 def play():
@@ -21,10 +28,7 @@ def play():
 
     print("Welcome to the Number Guessing Game!")
     print("I'm thinking of a number between 1 and 100")
-    difficulty = input("Choose a difficulty. Type 'easy' or 'hard:'").lower()
-    while not (difficulty == "easy" or difficulty == "hard"):
-        print("Invalid selection! Try again")
-        difficulty = input("Choose a difficulty. Type 'easy' or 'hard:'").lower()
+    difficulty = get_difficulty()
 
     attempts = EASY_ATTEMPTS if difficulty == "easy" else HARD_ATTEMPTS # Ternary operator
 
