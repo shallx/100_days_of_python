@@ -29,18 +29,28 @@ def on_save():
         messagebox.showinfo(title="Opps", message="Please fill up all fields")
 
     else:
-        is_ok = messagebox.askokcancel(title=website, message=f"These are the details entered. \nEmail:{email} \nPassword:{password} \nIs it ok to save?")
-
-        if is_ok:
+        try:
             with open("data.json", mode="r") as file:
+                print("Before loading")
                 data = json.load(file)
-                print(data)
-                # data.update(json_data)
-                # json.dump(json_data, file, indent=4)
-
-        website_entry.delete(0,tk.END)
-        email_entry.delete(0,tk.END)
-        password_entry.delete(0,tk.END)
+                print(" i am in try")   
+        
+        except FileNotFoundError:
+            with open("data.json", mode="w") as file:
+                json.dump(json_data, file, indent=4)
+                print(" i am in except")
+        except json.JSONDecodeError:
+            messagebox.showinfo(title="data.json file is corrupted", message="It is either empty, or json file not properly formatted!")
+                
+        else:
+            data.update(json_data)
+            with open("data.json", mode="w") as file:
+                json.dump(data, file, indent=4)
+                print(" i am in else")   
+        finally:
+            website_entry.delete(0,tk.END)
+            email_entry.delete(0,tk.END)
+            password_entry.delete(0,tk.END)
 
 # ---------------------------- UI SETUP ------------------------------- #
 
