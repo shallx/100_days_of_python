@@ -60,3 +60,6 @@ canvas.itemconfig(word_text, text=card_manager.current_word["trans"])
 flip_timer = window.after(FLIP_TIME, flip_card)
 next_language()
 window.mainloop()
+
+# REFS
+# Wiki - https://en.wiktionary.org/wiki/Appendix:1000_Japanese_basic_words
