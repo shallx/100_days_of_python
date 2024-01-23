@@ -4,6 +4,19 @@ import pyperclip
 from password import PasswordGenerator
 import json
 
+ENTRY_STYLE = {
+    "fg": "black",
+    "bg": "#f5f5f5",
+    "borderwidth": 1,
+    # "relief": "groove",
+    "highlightthickness": 0
+}
+
+BUTTON_STYLE = {
+    "highlightthickness" : 0,
+    "borderwidth": 0,
+    "bg" : "white",
+}
 
 def search_password():
     site = website_entry.get()
@@ -82,16 +95,16 @@ password_label = tk.Label(text="Password:",fg="black", bg="white").grid(row=3, c
 
 
 # Entry
-website_entry = tk.Entry(width=21,fg="black", bg="white")
+website_entry = tk.Entry(width=21, **ENTRY_STYLE)
 website_entry.grid(row=1, column=1)
-email_entry = tk.Entry(width=38,fg="black", bg="white")
+email_entry = tk.Entry(width=38, **ENTRY_STYLE)
 email_entry.grid(row=2, column=1, columnspan=2)
-password_entry = tk.Entry(width=21,fg="black", bg="white")
+password_entry = tk.Entry(width=21, **ENTRY_STYLE)
 password_entry.grid(row=3, column=1)
 
 # Button
-generate_button = tk.Button(text="Generate Password", command=on_generate, highlightthickness=0).grid(row=3, column=2)
-add_button = tk.Button(text="Add", width=36, command=on_save, highlightthickness=0).grid(row=4, column=1, columnspan=2)
-search_button = tk.Button(text="Search", width=13, command=search_password, highlightthickness=0).grid(row=1, column=2)
+generate_button = tk.Button(text="Generate Password", command=on_generate, **BUTTON_STYLE).grid(row=3, column=2)
+add_button = tk.Button(text="Add", width=36, command=on_save, **BUTTON_STYLE).grid(row=4, column=1, columnspan=2)
+search_button = tk.Button(text="Search", width=13, command=search_password, **BUTTON_STYLE).grid(row=1, column=2)
 
 window.mainloop()
