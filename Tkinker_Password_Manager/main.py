@@ -24,7 +24,7 @@ def search_password():
     try:
         with open("data.json", mode="r") as file:
                 data = json.load(file)
-                messagebox.showinfo(title=f"Data Found!", message=f"Email:{data[site]["email"]}\nPassword:{data[site]["password"]}")
+                messagebox.showinfo(title=f"Data Found!", message=f'Email:{data[site]["email"]}\nPassword:{data[site]["password"]}')
                 
     except FileNotFoundError:
         messagebox.showinfo(title="File Not Found!", message="Data file not found!")
