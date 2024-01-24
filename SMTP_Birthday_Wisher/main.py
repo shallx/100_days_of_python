@@ -1,5 +1,3 @@
-
-
 FROM_EMAIL = "enter_email_from"
 TO_EMAIL = "enter_email_to"
 PASSWORD = "enter_pass"
