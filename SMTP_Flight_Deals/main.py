@@ -1,7 +1,15 @@
-#This file will need to use the DataManager,FlightSearch, FlightData, NotificationManager classes to achieve the program requirements.
-
 from data_manager import DataManager
+from flight_search import FlightSearch
 
 data_man = DataManager()
 
-data_man.update('B11:B14', [2,3,4,5])
+
+flight_search = FlightSearch()
+
+
+
+def update_iata_code():
+    flight_deals = data_man.get_cities() # data from sheet
+    new_data = [flight_search.get_destination_code(row["City"]) for row in flight_deals]
+    data_man.update(f"B2:B{len(new_data)+1}", new_data)
+    

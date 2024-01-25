@@ -6,11 +6,15 @@ class DataManager:
         
         self.wb_1 = self.client.open(SHEET_TITLE)
         self.worksheet = self.wb_1.get_worksheet(0)
-        # self.worksheet.update('A11', [[1, 2], [3, 4]])
     
     def update(self,range, value):
+        print(range)
+        print(value)
         cell_list = self.worksheet.range(range)
-        for cell in cell_list:
-            cell.value = "Rahi"
+        for i, val in enumerate(value):
+            cell_list[i].value = val
         self.worksheet.update_cells(cell_list)
+        
+    def get_cities(self):
+        return self.worksheet.get_records()
         
