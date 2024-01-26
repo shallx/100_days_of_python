@@ -16,5 +16,6 @@ class DataManager:
         self.worksheet.update_cells(cell_list)
         
     def get_cities(self):
-        return self.worksheet.get_records()
+        self.records = self.worksheet.get_records()
+        return self.records
         
