@@ -1,9 +1,11 @@
+from notification_manager import NotificationManager
 from data_manager import DataManager
 from flight_search import FlightSearch
 from datetime import datetime,timedelta
 
 data_man = DataManager()
 flight_search = FlightSearch()
+notification_manager = NotificationManager()
 
 ORIGIN_CITY_IATA = "LON"
 
@@ -26,6 +28,8 @@ def search_flights():
             from_time=tomorrow,
             to_time=six_month_from_today
         )
-        
+        if flight.price < destination["Lowest Price"]:
+            notification_manager.send_email(flight)
+
 
 search_flights()

@@ -24,7 +24,7 @@ class FlightSearch:
         query = {
             "fly_from": origin_city_code,
             "fly_to": destination_city_code,
-            "date_from": u.strftime("%d/%m/%Y"),
+            "date_from": from_time.strftime("%d/%m/%Y"),
             "date_to": to_time.strftime("%d/%m/%Y"),
             "nights_in_dst_from": 7,
             "nights_in_dst_to": 28,
