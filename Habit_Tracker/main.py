@@ -124,17 +124,10 @@ def update_a_graph():
 # update_a_pixel(date=dt.datetime(year=2024, month=1, day=7), quantity="26")
 # delete_a_pixel(date=dt.datetime(year=2024, month=1, day=17))
     
-lst = [(11,"24"),(12,"9"),(13,"6"),(14,"8"),(15,"27"),(16,"18"),(17,"27"),(18,"11"),(19,"10"),(22,"4"),(23,"17"),(24,"21")]
+lst = [(3, "17"), (4, "17"), (5, "22"), (6, "27"), (7, "25"), (8, "8"), (9, "10"), (10, "17"), (11, "23"), (12, "8"), (13, "5"), (14, "7"), (15, "26"), (16, "18"), (17, "26"), (18, "10"), (19, "9"), (20, "0"), (21, "0"), (22, "3"), (23, "16"), (24, "20"), (25, "26")]
 
 for s in lst:
     time.sleep(1)
-    post_a_pixel(date=dt.datetime(year=2024, month=1, day=s[0]), quantity=s[1])
-
-
-
-
-
-
-
-
+    # post_a_pixel(date=dt.datetime(year=2024, month=1, day=s[0]), quantity=s[1])
+    update_a_pixel(date=dt.datetime(year=2024, month=1, day=s[0]), quantity=s[1])
 
